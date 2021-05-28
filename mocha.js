@@ -27,7 +27,30 @@ const expect = (val1) => {
           //t.ok();
         }
       }
+    },
+    "toBe": (val2) => {
+      t.assertEquals(val1, val2)
+    },
+    "toBeUndefined": () => {
+      t.assertEquals(val1, undefined)
+    },
+    "toEqual": (val2) => {
+      t.assertEquals(val1, val2)
+    },
+    "toMatch": (val2) => {
+      if (!val1.match(new RegExp(val2))) {
+        new Error();
+      }
+    },
+    "toThrow": () => {
+      try {
+        val1();
+        t.fail();
+      } catch (e) {
+        //t.ok();
+      }
     }
   };
 };
-export { expect, it, describe, context };
+const test = Deno.test;
+export { expect, it, describe, context, test };
